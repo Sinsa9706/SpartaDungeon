@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\one\\Desktop\\부트캠프\\본캠프 강의\\Text_Game_\\Text_Game_\\Text_Game_.csproj",
+      "projectUniqueName": "D:\\GitHub\\SpartaDungeon\\Text_Game_\\Text_Game_\\Text_Game_.csproj",
       "projectName": "Text_Game_",
-      "projectPath": "C:\\Users\\one\\Desktop\\부트캠프\\본캠프 강의\\Text_Game_\\Text_Game_\\Text_Game_.csproj",
+      "projectPath": "D:\\GitHub\\SpartaDungeon\\Text_Game_\\Text_Game_\\Text_Game_.csproj",
       "packagesPath": "C:\\Users\\one\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\one\\Desktop\\부트캠프\\본캠프 강의\\Text_Game_\\Text_Game_\\obj\\",
+      "outputPath": "D:\\GitHub\\SpartaDungeon\\Text_Game_\\Text_Game_\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\one\\AppData\\Roaming\\NuGet\\NuGet.Config",
