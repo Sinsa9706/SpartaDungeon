@@ -5,30 +5,6 @@ using System.Xml.Linq;
 using static System.Console;
 using static Text_Game_.Program;
 
-
-//    public void CharacterInfo()
-//    {
-//        WriteLine($"Lv. {level:D2}");
-//        WriteLine($"{name} ( {job} )");
-//        WriteLine($"공격력 : {atk}");
-//        WriteLine($"방어력 : {def}");
-//        WriteLine($"체 력 : {hp}");
-//        WriteLine($"Gold : {gold} G");
-//    }
-//}
-
-//class Player : Character
-//{
-//    static void DisplayPlayerInfo()
-//    {
-//        Clear();
-//        ("상태 보기").PrintWithColor(ConsoleColor.Yellow, true);
-//        WriteLine("캐릭터의 정보가 표시됩니다.");
-//        WriteLine();
-
-//        player.DisplayPlayerInfo();
-//    }
-
 namespace Text_Game_
 {
     // 확장 메서드는 최상위 정적 클래스에 위치해야함
