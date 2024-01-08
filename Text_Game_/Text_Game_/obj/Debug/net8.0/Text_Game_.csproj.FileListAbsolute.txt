@@ -12,3 +12,18 @@ C:\Users\one\Desktop\부트캠프\본캠프 강의\Text_Game_\Text_Game_\obj\Deb
 C:\Users\one\Desktop\부트캠프\본캠프 강의\Text_Game_\Text_Game_\obj\Debug\net8.0\Text_Game_.pdb
 C:\Users\one\Desktop\부트캠프\본캠프 강의\Text_Game_\Text_Game_\obj\Debug\net8.0\Text_Game_.genruntimeconfig.cache
 C:\Users\one\Desktop\부트캠프\본캠프 강의\Text_Game_\Text_Game_\obj\Debug\net8.0\ref\Text_Game_.dll
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\bin\Debug\net8.0\Text_Game_.exe
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\bin\Debug\net8.0\Text_Game_.deps.json
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\bin\Debug\net8.0\Text_Game_.runtimeconfig.json
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\bin\Debug\net8.0\Text_Game_.dll
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\bin\Debug\net8.0\Text_Game_.pdb
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\obj\Debug\net8.0\Text_Game_.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\obj\Debug\net8.0\Text_Game_.AssemblyInfoInputs.cache
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\obj\Debug\net8.0\Text_Game_.AssemblyInfo.cs
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\obj\Debug\net8.0\Text_Game_.csproj.CoreCompileInputs.cache
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\obj\Debug\net8.0\Text_Game_.sourcelink.json
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\obj\Debug\net8.0\Text_Game_.dll
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\obj\Debug\net8.0\refint\Text_Game_.dll
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\obj\Debug\net8.0\Text_Game_.pdb
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\obj\Debug\net8.0\Text_Game_.genruntimeconfig.cache
+D:\GitHub\SpartaDungeon\Text_Game_\Text_Game_\obj\Debug\net8.0\ref\Text_Game_.dll

@@ -30,23 +30,53 @@ namespace Text_Game_
 
         static void Main(string[] args)
         {
-            GameSetting();
+            GameDataSetting();
+            PrintStartLogo();
 
             while (true)
             {
                 if (startMe == 0) DisplayStartMenu();
                 else if (startMe == 1) DisplayCharacterInfo();
                 else if (startMe == 2) DisplayInventory();
+                else if (startMe == 3) DisplayStore();
             }
         }
 
+        static void PrintStartLogo()
+        {
+            WriteLine("      _________                        __                     "  );
+            WriteLine("     /   _____/______ _____  _______ _/  |_ _____             "  );
+            WriteLine("     \\_____  \\ \\____ \\\\__  \\ \\_  __ \\\\   __\\\\__  \\"  );
+            WriteLine("     /        \\|  |_> >/ __ \\_|  | \\/ |  |   / __ \\_      "  );
+            WriteLine("    /_______  /|   __/(____  /|__|    |__|  (____  /          "  );
+            WriteLine("            \\/ |__|        \\/                    \\/        "  );
+            WriteLine();
+            WriteLine("________                     ____                          "     );
+            WriteLine("\\______ \\   __ __   ____    / ___\\   ____   ____    ____   "  );
+            WriteLine(" |    |  \\ |  |  \\ /    \\  / /_/  >_/ __ \\ /  _ \\  /    \\" );
+            WriteLine(" |    `   \\|  |  /|   |  \\ \\___  / \\  ___/(  <_> )|   |  \\ ");
+            WriteLine("/_______  /|____/ |___|  //_____/   \\___  >\\____/ |___|  / "   );
+            WriteLine("        \\/             \\/               \\/             \\/  " );
+            ("===========================================================").PrintWithColor(ConsoleColor.Yellow, true);
+            ("                   Press Anykey To Start                   ").PrintWithColor(ConsoleColor.Yellow, true);
+            ("===========================================================").PrintWithColor(ConsoleColor.Yellow, true);
+            ReadKey();
+        }
+
         // 게임 데이터 설정
-        static void GameSetting()
+        static void GameDataSetting()
         {
             player = new Character(10, "Sinsa", "전사", 10, 5, 100, 1500);
-
             items = new Item[10];
+            AddItem(new Item("무쇠갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 0, 0, 5, 1300));
+            AddItem(new Item("낡은 검", "쉽게 볼 수 있는 낡은 검입니다.", 1, 2, 0, 600));
+        }
 
+        static void AddItem(Item item)
+        {
+            if (Item.ItemCnt == 10) return;
+            items[Item.ItemCnt] = item;     // 0개 -> 0번 인덱스 / 1개 -> 1번 인덱스
+            Item.ItemCnt++;
         }
 
         // 메인 화면 출력 메서드
@@ -72,13 +102,55 @@ namespace Text_Game_
             WriteLine();
             Write("Lv. "); ($"{player.Level}").PrintWithColor(ConsoleColor.Magenta, true);
             WriteLine($"{player.Name} ( {player.Job} ) ");
-            Write("공격력 : "); ($"{player.Atk}").PrintWithColor(ConsoleColor.Magenta, true);
-            Write("방어력 : "); ($"{player.Def}").PrintWithColor(ConsoleColor.Magenta, true);
+
+            int bonusAtk = getSumBonusAtk();
+            if (bonusAtk > 0)
+            {
+                Write("공격력 : "); ($"{player.Atk + bonusAtk}").PrintWithColor(ConsoleColor.Magenta, false);
+                Write(" ("); ("+" + bonusAtk.ToString()).PrintWithColor(ConsoleColor.Magenta, false); WriteLine(")");
+            }
+            else
+            {
+                Write("공격력 : "); ($"{player.Atk}").PrintWithColor(ConsoleColor.Magenta, true);
+            }
+
+            int bonusDef = getSumBonusDef();
+            if (bonusDef > 0)
+            {
+                Write("방어력 : "); ($"{player.Def + bonusDef}").PrintWithColor(ConsoleColor.Magenta, false);
+                Write(" ("); ("+" + bonusDef.ToString()).PrintWithColor(ConsoleColor.Magenta, false); WriteLine(")");
+            }
+            else
+            {
+                Write("방어력 : "); ($"{player.Def}").PrintWithColor(ConsoleColor.Magenta, true);
+            }
+
             Write("체 력 : "); ($"{player.Hp}").PrintWithColor(ConsoleColor.Magenta, true);
             Write("Gold : "); ($"{player.Gold}").PrintWithColor(ConsoleColor.Magenta, true);
+            WriteLine();
             ("0. ").PrintWithColor(ConsoleColor.Magenta, false); WriteLine("나가기");
             WriteLine();
             startMe = GetPlayerSelect(0, 0);
+        }
+
+        static int getSumBonusAtk()
+        {
+            int sum = 0;
+            for (int i = 0; i < Item.ItemCnt; i++)
+            {
+                if (items[i].IsEquiped) sum += items[i].Atk;
+            }
+            return sum;
+        }
+
+        static int getSumBonusDef()
+        {
+            int sum = 0;
+            for (int i = 0; i < Item.ItemCnt; i++)
+            {
+                if (items[i].IsEquiped) sum += items[i].Def;
+            }
+            return sum;
         }
 
         // 인벤토리 표시
@@ -89,6 +161,90 @@ namespace Text_Game_
             WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
             WriteLine();
             WriteLine("[아이템 목록]");
+            WriteLine();
+            for (int i = 0; i < Item.ItemCnt; i++)
+            {
+                items[i].ItemDescription();
+            }
+            WriteLine();
+            ("1. ").PrintWithColor(ConsoleColor.Magenta, false); WriteLine("장착 관리");
+            ("0. ").PrintWithColor(ConsoleColor.Magenta, false); WriteLine("나가기");
+            WriteLine();
+            startMe = GetPlayerSelect(0, 1);
+            switch (startMe)
+            {
+                case 0:
+                    DisplayStartMenu();
+                    break;
+                case 1:
+                    EquipItem();
+                    break;
+            }
+        }
+
+        private static void EquipItem()
+        {
+            Clear();
+            ("인벤토리 - 장착 관리").PrintWithColor(ConsoleColor.Yellow, true);
+            WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+            WriteLine();
+            WriteLine("[아이템 목록]");
+            WriteLine();
+            for (int i = 0; i < Item.ItemCnt; i++)
+            {
+                items[i].ItemDescription(true, i + 1);
+            }
+            WriteLine();
+            ("0. ").PrintWithColor(ConsoleColor.Magenta, false); WriteLine("나가기");
+            WriteLine();
+            startMe = GetPlayerSelect(0, Item.ItemCnt);
+            switch (startMe)
+            {
+                case 0:
+                    DisplayInventory();
+                    break;
+                default:
+                    ToggleEquipStatus(startMe - 1);
+                    EquipItem();
+                    break;
+            }
+        }
+
+        private static void ToggleEquipStatus(int idx)
+        {
+            items[idx].IsEquiped = !items[idx].IsEquiped;
+        }
+
+        static void DisplayStore()
+        {
+            Clear();
+            ("상점 - 아이템 구매").PrintWithColor(ConsoleColor.Yellow, true);
+            WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
+            WriteLine();
+            WriteLine("[보유 골드]");
+            (player.Gold.ToString()).PrintWithColor(ConsoleColor.Magenta, false);WriteLine(" G");
+            WriteLine();
+            WriteLine("[아이템 목록]");
+
+            WriteLine();
+            ("1. ").PrintWithColor(ConsoleColor.Magenta, false); WriteLine("아이템 구매");
+            ("0. ").PrintWithColor(ConsoleColor.Magenta, false); WriteLine("나가기");
+            WriteLine();
+            startMe = GetPlayerSelect(0, 1);
+            switch (startMe)
+            {
+                case 0:
+                    DisplayStore();
+                    break;
+                case 1:
+                    BuyItem();
+                    break;
+            }
+        }
+
+        private static void BuyItem()
+        {
+            throw new NotImplementedException();
         }
 
         // 메뉴 선택
@@ -96,8 +252,8 @@ namespace Text_Game_
         {
             WriteLine("원하시는 행동을 입력해주세요.");
             (">> ").PrintWithColor(ConsoleColor.Yellow, false);
-            int select = 0;
-            bool isNum = false;
+            int select = 0;     // tryParse
+            bool isNum = false; // While
             while (true)
             {
                 isNum = int.TryParse(ReadLine(), out select);
@@ -114,7 +270,7 @@ namespace Text_Game_
         {
             public int Level { get; }
             public string Name { get; }
-            public string Job { get; }
+            public string Job { get; }      //Enum으로 대체 가능
             public int Atk { get; }
             public int Def { get; }
             public int Hp { get; }
@@ -140,10 +296,12 @@ namespace Text_Game_
             public int Atk { get; }
             public int Def { get; }
             public int Gold { get; }
-            public bool IsEquiped { get; set; }
-            public static int ItemCount = 0;
 
-            public Item(string name, string description, int type, int atk, int def, int gold, bool isEquiped)
+            public bool IsEquiped { get; set; }     //장착 여부
+
+            public static int ItemCnt = 0;
+
+            public Item(string name, string description, int type, int atk, int def, int gold, bool isEquiped = false)
             {
                 Name = name;
                 Description = description;
@@ -154,12 +312,12 @@ namespace Text_Game_
                 IsEquiped = isEquiped;
             }
 
-            public void ItemDescription(bool withNumber = false, int i = 0)
+            public void ItemDescription(bool withNumber = false, int idx = 0)
             {
                 Write("- ");
                 if (withNumber)
                 {
-                    ($"{i}").PrintWithColor(ConsoleColor.Magenta, false);
+                    ($"{idx}. ").PrintWithColor(ConsoleColor.Magenta, false);
                 }
                 if (IsEquiped)
                 {
@@ -177,20 +335,20 @@ namespace Text_Game_
 
                 WriteLine(Description);
             }
-            
+
             // 아이템 이름의 줄맞춤을 위한 메서드
             public static int GetPrintableLength(string str)
             {
                 int length = 0;
-                foreach  (char c in str)
+                foreach (char c in str)
                 {
-                    if(char.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.OtherLetter)
+                    if (char.GetUnicodeCategory(c) == System.Globalization.UnicodeCategory.OtherLetter)
                     {
-                        length += 2;
+                        length += 2;  // 한글인 경우 길이 2
                     }
                     else
                     {
-                        length += 1;
+                        length += 1;  // 한글이 아닌 경우 길이 1
                     }
                 }
                 return length;
@@ -198,9 +356,9 @@ namespace Text_Game_
 
             public static string PadRightForMixedText(string str, int totalLength)
             {
-                int currentLength = GetPrintableLength(str);
-                int padding = totalLength - currentLength;
-                return str.PadRight(str.Length + padding);
+                int currentLength = GetPrintableLength(str);  // 텍스트 실제 길이
+                int padding = totalLength - currentLength;  // 원하는 길이 - 현재 길이
+                return str.PadRight(str.Length + padding);  // 원하는 길이만큼 붙여주기
             }
         }
     }
